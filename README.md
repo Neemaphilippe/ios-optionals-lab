@@ -10,19 +10,33 @@ Fork and clone this repo. On your fork, answer and commit the follow questions. 
 Write 3 different ways of safely unwrapping and printing the value of `userName`.  If it is nil, print "No name".
 
 - Method one: Check for nil and force unwrap
-
+```if userName != nil {
+print(userName!)
+```
 - Method two: Optional binding
-
+```
+if let unwrappedUserName = userName {
+    print(unwrappedUserName)
+```
 - Method three: Nil coalescing
-
-
+```
+var userName: String?
+var unwrappedUserName = userName ?? false
+print(unwrappedUserName)
+```
 ## Question 2
 
 Given optional string `backgroundColor`, write code that safely unwraps and prints it. If backgroundColor is nil, give it a value.
 
 `var backgroundColor: String?`
+```
+var backgroundColor: String?
+backgroundColor = "pink"
 
-
+if let  unwrappedBackgroundColor = backgroundColor{
+print("The background color is \(unwrappedBackgroundColor)")
+}
+```
 ## Question 3
 
 Given an optional width and an optional height of a rectangle, write code that calculates and prints the area. Print an error message if either value is nil.
@@ -31,8 +45,22 @@ Given an optional width and an optional height of a rectangle, write code that c
 var width: Double?
 var height: Double?
 ```
+```
+var width: Double?
+var height: Double?
+width = 8.0
+height = 5.0
 
+//area = width * height
 
+if let unwrappedWidth = width {
+    if let unwrappedHeight = height {
+    print(unwrappedWidth * unwrappedHeight)
+    }
+}else {
+print("You made an error")
+}
+```
 ## Question 4
 
 Given the following optional variables `name`, `age` and `height`. Write code so that it prints `name`, `age` and `height` if they all have a value. If any are nil, print an error message. Try using optional binding.
@@ -42,7 +70,25 @@ var name: String?
 var age: Int?
 var height: Double?
 ```
+```
+var name: String?
+var age: Int?
+var height: Double?
+name = "Beth"
+age = 29
+height = 5.4
 
+
+if let unwrappedName = name {
+    if let unwrappedAge = age {
+        if let unwrappedHeight = height{
+            print(unwrappedName, unwrappedAge, unwrappedHeight)
+            }
+        }
+} else {
+print("Error!")
+}
+```
 
 ## Question 5
 
@@ -53,14 +99,36 @@ var firstName: String = "Johnny"
 var middleName: String?
 var lastName: String = "Stone"
 ```
+```
+var firstName: String = "Johnny"
+var middleName: String?
+var lastName: String = "Stone"
+middleName = "Ray"
 
+
+
+var fullName = ("\(firstName)" + "\(middleName!)" + "\(lastName)")
+
+print("My full name is \(fullName)")
+```
 
 ## Question 6
 
 Write code that adds 15 to `myIntString`, then prints the sum. Use the `Int()` constructor which returns an optional Int `(Int?)`.
 
 `let myIntString = "35"`
+```
+let myIntString: String? = "35"
+var unwrappedString = myIntString ?? "nothing"
 
+
+if let unwrappedString = myIntString {
+    if let integerVersion = Int(unwrappedString) {
+        print(integerVersion + 15)
+    }
+}
+
+```
 
 ## Question 7
 
@@ -73,7 +141,27 @@ var testCaseOne = (4, nil, 7)
 var testCaseTwo = (nil, nil, 9)
 var testCaseThree = (5, 10, 24)
 ```
+```
+var testOne: (Int?, Int?, Int?)? = (4, nil, 7)
+var testTwo: (Int?, Int?, Int?)? = (nil, nil, 9)
+var testThree: (Int?, Int?, Int?)? = (5, 10, 24)
+let testCases = [testOne, testTwo, testThree]
+var sum = 0
 
+for tCase in testCases {
+    if let currentCase = tCase {
+    if let num1 = currentCase.0 {
+    sum += num1
+    }
+    if let num2 = currentCase.1 {
+    sum += num2
+    }
+    if let num3 = currentCase.2 {
+    sum += num3
+    }
+}
+}
+```
 
 ## Question 8
 
@@ -85,8 +173,11 @@ if Bool.random() {
  tuple = (5, 3)
 }
 ```
-
-
+```
+if let tupleValue = tuple {
+    print(tupleValue)
+}
+```
 ## Question 9
 
 Write code that either doubles `myInt` and then prints it, or prints an error message if myInt is nil.
@@ -97,8 +188,15 @@ if Bool.random() {
  myInt = 5
 }
 ```
-
-
+```
+if let myDouble = myDouble {
+    print(myDouble * 2)
+} else {
+print("You encountered an error")
+}
+```
+```
+```
 ## Question 10
 
 Write code that prints out the product of `myDouble` and `doubleTwo` or prints an error message if `myDouble` is nil.
@@ -111,8 +209,14 @@ if Bool.random() {
  myDouble = 12
 }
 ```
+```
+if let product = myDouble {
+    print(product * doubleTwo)
 
-
+} else {
+    print("does not compute")
+}
+```
 ## Question 11
 
 Determine if the variable contains a Boolean or nil value. If nil set the variable to false, else keep it true.
@@ -124,8 +228,9 @@ if Bool.random() {
  isTheGreatest = true
 }
 ```
-
-
+```
+print(isTheGreatest ?? false )
+```
 ## Question 12
 
 Given the code below print the sum of each non-nil element in `myTuple`.
@@ -141,8 +246,14 @@ if Bool.random() {
  myTuple.3 = 10
 }
 ```
-
-
+```
+let a = myTuple.0 ?? 0
+let b = myTuple.1 ?? 0
+let c = myTuple.2 ?? 0
+let d = myTuple.3 ?? 0
+var sum = a + b + c + d
+    print(sum)
+```
 ## Question 13
 
 Given the helper functions and code below, check to see if your `evolutionaryStone` is able to evolve your pokemon.  The table below shows the appropriate matches of pokemon to stone:
